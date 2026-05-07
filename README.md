@@ -23,8 +23,7 @@ tests/
   api/       → API test cases
   integration/       → Integration test cases
 pages/       → Page Object Models
-utils/       → Reusable API helpers & utilities
-data/        → Test data (e.g., generated IDs)
+fixtures/
 .env         → Environment variables
 ```
 
@@ -43,9 +42,10 @@ npm install
 Create a `.env` file:
 
 ```
-BASE_URL=http://localhost:8080
-BASIC_USER=superadmin
-BASIC_PASS=ulan
+FRONTEND_BASE_URL=
+API_BASE_URL=
+TEST_USERNAME=
+TEST_PASSWORD=
 ```
 
 ---
@@ -61,42 +61,63 @@ npx playwright test
 ### Run UI tests only
 
 ```
-npx playwright test tests/UI
+npx playwright test tests/ui
 ```
 
 ### Run API tests only
 
 ```
-npx playwright test tests/API
+npx playwright test tests/api
+```
+
+---
+### Run Integration tests only
+
+```
+npx playwright test tests/integration
 ```
 
 ---
 
 ##  Test Coverage
 
-### UI Tests
+## UI test
 
-* Login validation
-* Navigation flows
-* Form interactions
-* End-to-end user actions
+Automate successful checkout:
 
-### API Tests
+1. Open the app.
+2. Login with username and password.
+3. Verify product catalog is displayed.
+4. Add at least two available products to cart.
+5. Validate cart item names, quantities, and subtotal.
+6. Proceed to checkout.
+7. Enter shipping details.
+8. Place order.
+9. Validate confirmation message.
+10. Capture order ID from UI.
 
-* Create / retrieve / process resources
-* Response validation
-* Authentication handling (Basic + session-based)
+## API tests
 
-### Integration Tests
+Automate:
 
-* Data created via API validated in UI
+1. Successful login.
+2. Invalid login.
+3. Fetch products.
+4. Create order with a valid token.
+5. One negative case: missing token, invalid product ID, invalid quantity, or out-of-stock product.
+
+## UI + API integration test
+
+After placing an order through UI:
+
+1. Fetch the order through API.
+2. Validate order ID, customer details, items, quantities, total, and status.
 
 ---
 
 ##  Authentication Handling
 
 * Basic authentication for API requests
-* Session-based authentication handled via Playwright browser context
 
 ---
 
@@ -104,16 +125,6 @@ npx playwright test tests/API
 
 * Some tests rely on a locally running backend (`localhost`)
 * CI execution may fail without required services
-* API behavior may depend on application state (e.g., visit processing)
-
----
-
-##  Highlights
-
-* Clean Page Object Model implementation
-* Reusable API client structure
-* Dynamic data handling and persistence
-* Hybrid UI + API validation approach
 
 ---
 

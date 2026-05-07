@@ -1,3 +1,5 @@
+//const { customer } = require('../fixtures/testData');
+
 class CheckoutPage {
     constructor(page) {
       this.page = page; 
@@ -11,7 +13,7 @@ class CheckoutPage {
 
     }
   
-
+    
     async checkout() {
         await this.checkoutbtn.click();
         //await this.placeorder.click();
@@ -21,6 +23,9 @@ class CheckoutPage {
         await this.fullnameinput.fill('Nishantha');
         await this.addressinput.fill('75, ABC road');
         await this.cityinput.fill('Colombo');
+        //await this.fullnameinput.fill(customer.fullName);
+        //await this.addressinput.fill(customer.address);
+        //await this.cityinput.fill(customer.city);
     }
 
     async placeorderfunc() {

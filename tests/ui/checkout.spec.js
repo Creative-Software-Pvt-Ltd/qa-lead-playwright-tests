@@ -3,6 +3,7 @@ const { LoginPage } = require('../../pages/LoginPage.page');
 const { ProductPage } = require('../../pages/ProductPage.page');
 const { CartPage } = require('../../pages/CartPage.page');
 const { CheckoutPage } = require('../../pages/CheckoutPage.page');
+//const { customer } = require('../../fixtures/testData');
 
 //1. Open the app.
 test('open the app', async ({ page }) => {

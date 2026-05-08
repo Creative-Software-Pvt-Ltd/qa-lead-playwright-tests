@@ -2,14 +2,14 @@
 
 ##  Overview
 
-This project contains automated UI, API and Integration tests implemented using Playwright.
+This project contains automated UI, API, and end-to-end integration tests implemented using Playwright.
 It demonstrates end-to-end validation, API testing, and hybrid UI + API workflows.
 
 ---
 
 ##  Tech Stack
 
-* Playwright (UI + API testing)
+* Playwright (UI + API + Integration testing)
 * JavaScript (Node.js)
 * dotenv (environment configuration)
 
@@ -19,12 +19,16 @@ It demonstrates end-to-end validation, API testing, and hybrid UI + API workflow
 
 ```
 tests/
-  ui/        → UI test cases
-  api/       → API test cases
-  integration/       → Integration test cases
-pages/       → Page Object Models
-fixtures/
-.env         → Environment variables
+  ui/           → UI test cases
+  api/          → API test cases
+  integration/  → End-to-end UI/API validation scenarios
+
+pages/           → Page Object Models
+fixtures/        → Shared test data and fixtures
+
+.env.example         → Environment variables example
+playwright.config.js → Playwright configurations
+README.md            → Project Instructions
 ```
 
 ---
@@ -50,6 +54,26 @@ TEST_PASSWORD=
 
 ---
 
+## Framework Design Decisions
+
+### Page Object Model
+
+POM structure was used to:
+- improve maintainability
+- reduce selector duplication
+- separate UI logic from test logic
+- simplify framework scalability
+
+### Test Design Principles
+
+- Tests are designed to be independent
+- Hard waits are avoided
+- Assertions validate business outcomes
+- Reusable helper methods are preferred over duplicated logic
+
+
+---
+
 ##  Running Tests
 
 ### Run all tests
@@ -70,13 +94,20 @@ npx playwright test tests/ui
 npx playwright test tests/api
 ```
 
----
 ### Run Integration tests only
 
 ```
 npx playwright test tests/integration
 ```
+---
 
+## Reporting
+
+Generate HTML report:
+
+```
+npx playwright show-report
+```
 ---
 
 ##  Test Coverage
@@ -117,7 +148,21 @@ After placing an order through UI:
 
 ##  Authentication Handling
 
-* Basic authentication for API requests
+* API authentication is handled using Bearer tokens
+* Login API generates an access token
+* Token is reused for authenticated API requests
+* Sensitive credentials are managed through `.env` variables
+
+---
+
+## Future Improvements
+
+- CI/CD integration using GitHub Actions
+- Retry strategy for flaky environments
+- Parallel execution optimization
+- Visual regression testing
+- Cross-browser execution pipeline
+- API schema validation
 
 ---
 

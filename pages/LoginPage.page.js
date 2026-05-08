@@ -2,10 +2,10 @@ class LoginPage {
     constructor(page) {
       this.page = page;
   
-      this.usernameInput = page.locator("input[placeholder='testuser']");
-      this.passwordInput = page.locator("input[placeholder='password123']");
+      this.usernameInput = page.getByLabel('Username');
+      this.passwordInput = page.getByLabel('Password');
       this.loginButton = page.locator("button[type='submit']");
-      this.signinsign = page.locator(".user-chip");
+      this.signedInUserText = page.locator(".user-chip");
 
 
     }

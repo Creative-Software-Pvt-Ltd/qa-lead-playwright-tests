@@ -1,20 +1,23 @@
 class CartPage {
     constructor(page) {
       this.page = page;
-  
-      this.addtocart1 = page.locator("button[data-testid='add-to-cart-p-1001']");
-      this.addtocart2 = page.locator("button[data-testid='add-to-cart-p-1002']");
-
+      this.cartItemNames = page.locator(".cart-item strong");
+      this.subtotalAmount = page.locator("strong[data-testid='cart-subtotal']");
+      this.removeButtons = page.locator(".cart-item button");
       
     }
   
-
-    
-    async additemstocart() {    
-        await this.addtocart1.click();
-        await this.addtocart2.click();
+    getAddToCartButton(productId) {
+        return this.page.getByTestId(`add-to-cart-${productId}`);
     }
 
+    getCartItemQuantity(productId) {
+        return this.page.getByTestId(`cart-qty-${productId}`);
+    }
+    
+    async addProductToCart(productId) {  
+        await this.getAddToCartButton(productId).click();       
+    }
 
   }
   

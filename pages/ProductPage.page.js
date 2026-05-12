@@ -1,16 +1,12 @@
-class ProductPage {
+export class ProductPage {
     constructor(page) {
       this.page = page;
   
-      this.shopProductsButton = page.locator(".hero-button");
-      this.productsHeader = page.locator("section[id='products'] h2");
-     
+      this.shopProductsButton = page.getByRole('link', { name: 'Shop Products' });  
+      this.productsHeader = page.getByRole('heading', {name: 'Featured Products'});
     }
   
-
     async navigateToProducts() {
-        await this.shopProductsButton.click();
-    }   
-}
-  
-  module.exports = { ProductPage };
+      await this.shopProductsButton.click();
+    }
+  }
